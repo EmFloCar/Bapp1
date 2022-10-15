@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 const cors = require("cors");
 const multer = require("multer");
+require('dotenv').config();
 mongoose.Promise = global.Promise;
 
 //create our app
@@ -18,9 +19,10 @@ app.use(cors());
 app.use(express.json())
 
 const palabraPath = require("./routes/Palabras")
-
+const login = require("./routes/auth");
 //routes
 app.use("/", palabraPath)
+app.use("/login", login)
 
 //Settings
 app.set("port", process.env.PORT || 4000);
@@ -33,7 +35,7 @@ app.listen(app.get("port"), () => {
 //DB conection
 
 mongoose
-  .connect('mongodb+srv://mapa:QmVzoUIvSL04sIov@cluster0.xmy9g5h.mongodb.net/?retryWrites=true&w=majority', {
+  .connect(process.env.DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
