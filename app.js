@@ -22,16 +22,19 @@ const palabraPath = require("./routes/Palabras")
 const login = require("./routes/auth");
 //routes
 app.use("/", palabraPath)
-app.use("/login", login)
+app.use("/", login)
 
-//Settings
-app.set("port", process.env.PORT || 4000);
+// //Settings
+// app.set("port", process.env.PORT || 4000);
 
-//start server
-app.listen(app.get("port"), () => {
-  console.log("Server on port", app.get("port"));
-});
+// //start server
+// app.listen(app.get("port"), () => {
+//   console.log("Server on port", app.get("port"));
+// });
 
+app.listen(process.env.PORT || 3000, () => {
+  console.log("server on");
+})
 //DB conection
 
 mongoose
